@@ -33,6 +33,7 @@ export const ProductsGroupList: FC<IProductsGroupListProps> = ({
 			setActiveCategoryId(categoryId)
 		}
 	}, [categoryId, intersection?.isIntersecting, title])
+
 	return (
 		<div className={cn("", className)} id={title} ref={intersectionRef}>
 			<Title text={title} size="lg" className="font-extrabold mb-5" />
