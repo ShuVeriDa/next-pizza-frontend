@@ -1,12 +1,21 @@
+"use client"
+
 import { FC } from "react"
 
 import { FilterCheckbox, Title } from "@/components/shared/index"
+import { useFilterIngredients } from "@/hooks/useFilterIngredients"
 import { Input, RangeSlider } from "../ui"
 import { CheckboxFiltersGroup } from "./checkbox-filters-group"
 
 interface IFiltersProps {}
 
 export const Filters: FC<IFiltersProps> = () => {
+	const { ingredients } = useFilterIngredients()
+	const items = ingredients.map(ingredient => ({
+		value: String(ingredient.id),
+		text: ingredient.name,
+	}))
+
 	return (
 		<div className="">
 			<Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
@@ -39,82 +48,8 @@ export const Filters: FC<IFiltersProps> = () => {
 				title="Ингредиенты"
 				className="mt-5"
 				limit={6}
-				items={[
-					{
-						text: "Сырный соус",
-						value: "1",
-					},
-					{
-						text: "Моццарелла",
-						value: "2",
-					},
-					{
-						text: "Чеснок",
-						value: "3",
-					},
-					{
-						text: "Солённые огурчики",
-						value: "4",
-					},
-					{
-						text: "Красный лук",
-						value: "5",
-					},
-					{
-						text: "Томаты",
-						value: "6",
-					},
-					{
-						text: "Сырный соус",
-						value: "1",
-					},
-					{
-						text: "Моццарелла",
-						value: "2",
-					},
-					{
-						text: "Чеснок",
-						value: "3",
-					},
-					{
-						text: "Солённые огурчики",
-						value: "4",
-					},
-					{
-						text: "Красный лук",
-						value: "5",
-					},
-					{
-						text: "Томаты",
-						value: "6",
-					},
-				]}
-				defaultItems={[
-					{
-						text: "Сырный соус",
-						value: "1",
-					},
-					{
-						text: "Моццарелла",
-						value: "2",
-					},
-					{
-						text: "Чеснок",
-						value: "3",
-					},
-					{
-						text: "Солённые огурчики",
-						value: "4",
-					},
-					{
-						text: "Красный лук",
-						value: "5",
-					},
-					{
-						text: "Томаты",
-						value: "6",
-					},
-				]}
+				items={items.slice(0, 6)}
+				defaultItems={items}
 			/>
 		</div>
 	)
